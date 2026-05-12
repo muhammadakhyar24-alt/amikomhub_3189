@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Partner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class PartnerSeeder extends Seeder
 {
@@ -13,16 +14,13 @@ class PartnerSeeder extends Seeder
      */
     public function run(): void
     {
-        $partners = [
-            ['name' => 'PT Teknologi Indonesia', 'logo_url' => 'https://placeholder.co/200x200'],
-            ['name' => 'CV Inovasi Digital', 'logo_url' => 'https://placeholder.co/200x200'],
-            ['name' => 'PT Solusi Bisnis', 'logo_url' => 'https://placeholder.co/200x200'],
-            ['name' => 'Startup Kreative Media', 'logo_url' => 'https://placeholder.co/200x200'],
-            ['name' => 'PT Jaya Makmur Sejahtera', 'logo_url' => 'https://placeholder.co/200x200'],
-        ];
+        $faker = Faker::create();
 
-        foreach ($partners as $partner) {
-            Partner::create($partner);
+        for ($i = 0; $i < 5; $i++) {
+            Partner::create([
+                'name' => $faker->company(),
+                'logo_url' => 'https://placeholder.co/200x200'
+            ]);
         }
     }
 }
