@@ -15,7 +15,11 @@
         @foreach($partners as $partner)
         <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
             <div class="mb-4 flex justify-center bg-gray-100 rounded-lg p-4" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-                <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" style="max-width: 100%; max-height: 150px; width: auto; height: auto;" onerror="this.style.display='none'">
+                @if($partner->logo)
+                    <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" style="max-width: 100%; max-height: 150px; width: auto; height: auto;">
+                @else
+                    <span class="text-gray-400">Tidak ada logo</span>
+                @endif
             </div>
             <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">{{ $partner->name }}</h3>
             <div class="flex gap-2 justify-center">

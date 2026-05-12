@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
@@ -32,8 +33,14 @@ class PartnerController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'logo_url' => 'required|string',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // Handle file upload
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $logoPath;
+        }
 
         Partner::create($validated);
 
@@ -64,8 +71,18 @@ class PartnerController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'logo_url' => 'required|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // Handle file upload if exists
+        if ($request->hasFile('logo')) {
+            // Delete old logo if exists
+            if ($partner->logo && Storage::disk('public')->exists($partner->logo)) {
+                Storage::disk('public')->delete($partner->logo);
+            }
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $logoPath;
+        }
 
         $partner->update($validated);
 
@@ -78,9 +95,15 @@ class PartnerController extends Controller
      */
     public function destroy(Partner $partner)
     {
+        // Delete logo file if exists
+        if ($partner->logo && Storage::disk('public')->exists($partner->logo)) {
+            Storage::disk('public')->delete($partner->logo);
+        }
+
         $partner->delete();
 
         return redirect()->route('admin.partners.index')
             ->with('success', 'Partner berhasil dihapus!');
     }
 }
+

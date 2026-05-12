@@ -5,7 +5,13 @@
     <h2 class="text-2xl font-bold mb-6 text-gray-800">Detail Partner</h2>
     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <div class="flex flex-col items-center mb-6">
-            <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" class="h-40 w-40 object-cover rounded mb-4">
+            @if($partner->logo)
+                <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" class="h-40 w-40 object-cover rounded mb-4">
+            @else
+                <div class="h-40 w-40 bg-gray-200 rounded mb-4 flex items-center justify-center">
+                    <span class="text-gray-400">Tidak ada logo</span>
+                </div>
+            @endif
             <h3 class="text-2xl font-bold text-gray-800">{{ $partner->name }}</h3>
         </div>
 
