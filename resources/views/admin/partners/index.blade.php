@@ -14,8 +14,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($partners as $partner)
         <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-            <div class="mb-4 flex justify-center">
-                <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" class="h-32 w-32 object-cover rounded">
+            <div class="mb-4 flex justify-center bg-gray-100 rounded-lg p-4" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                <img src="{{ $partner->logo_url }}" alt="{{ $partner->name }}" style="max-width: 100%; max-height: 150px; width: auto; height: auto;" onerror="this.style.display='none'">
             </div>
             <h3 class="text-lg font-bold text-gray-800 mb-4 text-center">{{ $partner->name }}</h3>
             <div class="flex gap-2 justify-center">

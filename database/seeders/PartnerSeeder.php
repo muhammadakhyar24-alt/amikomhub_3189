@@ -16,13 +16,13 @@ class PartnerSeeder extends Seeder
     {
         $faker = Faker::create();
         
-        // Array logo URLs yang valid
+        // Array logo URLs dari CDN yang reliable
         $logos = [
-            'https://via.placeholder.com/200x100?text=Partner1',
-            'https://via.placeholder.com/200x100?text=Partner2',
-            'https://via.placeholder.com/200x100?text=Partner3',
-            'https://via.placeholder.com/200x100?text=Partner4',
-            'https://via.placeholder.com/200x100?text=Partner5',
+            'https://dummyimage.com/200x100/0066cc/FFFFFF?text=Partner+1',
+            'https://dummyimage.com/200x100/ff6600/FFFFFF?text=Partner+2',
+            'https://dummyimage.com/200x100/00cc66/FFFFFF?text=Partner+3',
+            'https://dummyimage.com/200x100/cc0066/FFFFFF?text=Partner+4',
+            'https://dummyimage.com/200x100/6600cc/FFFFFF?text=Partner+5',
         ];
 
         for ($i = 0; $i < 5; $i++) {
