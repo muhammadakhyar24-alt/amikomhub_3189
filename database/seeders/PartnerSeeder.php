@@ -15,11 +15,20 @@ class PartnerSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        
+        // Array logo URLs yang valid
+        $logos = [
+            'https://via.placeholder.com/200x100?text=Partner1',
+            'https://via.placeholder.com/200x100?text=Partner2',
+            'https://via.placeholder.com/200x100?text=Partner3',
+            'https://via.placeholder.com/200x100?text=Partner4',
+            'https://via.placeholder.com/200x100?text=Partner5',
+        ];
 
         for ($i = 0; $i < 5; $i++) {
             Partner::create([
                 'name' => $faker->company(),
-                'logo_url' => 'https://placeholder.co/200x200'
+                'logo_url' => $logos[$i]
             ]);
         }
     }
