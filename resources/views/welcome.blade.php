@@ -94,5 +94,39 @@
             </div>
         @endforelse
     </div>
+
+    <!-- Blok Sponsor Partner -->
+    <div class="mt-20 pt-16 border-t-2 border-gray-200">
+        <div class="mb-12 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Mitra Kami</h2>
+            <p class="text-lg text-gray-600">Bekerja sama dengan partner terpercaya</p>
+        </div>
+
+        <!-- Grid Partner -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            @forelse($partners as $partner)
+                <div class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center justify-center">
+                    <!-- Logo Partner -->
+                    <div class="mb-6 w-full flex items-center justify-center h-32 bg-gray-50 rounded-lg p-4">
+                        @if($partner->logo)
+                            <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300">
+                        @else
+                            <span class="text-gray-400 text-center">{{ $partner->name }}</span>
+                        @endif
+                    </div>
+                    
+                    <!-- Nama Partner -->
+                    <h3 class="text-lg font-bold text-gray-800 text-center group-hover:text-indigo-600 transition">
+                        {{ $partner->name }}
+                    </h3>
+                </div>
+            @empty
+                <!-- Pesan jika tidak ada partner -->
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-600 text-lg font-semibold">Belum ada partner yang terdaftar</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
 </div>
 @endsection
